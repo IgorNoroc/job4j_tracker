@@ -1,11 +1,23 @@
 package ru.job4j.tracker;
 
 public class DeleteAction implements UserAction {
+    /**
+     * Назвние команды.
+     *
+     * @return описание действия.
+     */
     @Override
     public String name() {
         return "=== Delete item ===";
     }
 
+    /**
+     * Удаление заявки из хранилища.
+     *
+     * @param input   входящие данные.
+     * @param tracker хранилище.
+     * @return получилось или нет.
+     */
     @Override
     public boolean execute(Input input, Tracker tracker) {
         boolean result = false;
@@ -16,7 +28,6 @@ public class DeleteAction implements UserAction {
         } else {
             System.out.println("That Id not found");
         }
-        System.out.println("===================");
         return result;
     }
 }

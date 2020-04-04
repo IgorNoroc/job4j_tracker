@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
-
+/**
+ * Собираем заявку.
+ */
 public class Item {
     private String id;
     private String name;

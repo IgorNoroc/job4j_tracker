@@ -1,11 +1,44 @@
 package ru.job4j.tracker;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.StringJoiner;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class StartUITest {
+    private final PrintStream stdout = System.out;
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+    @Before
+    public void loadOutput() {
+        System.setOut(new PrintStream(this.out));
+    }
+
+    @After
+    public void backOutput() {
+        System.setOut(this.stdout);
+    }
+
+    @Test
+    public void whenPrtMenu() {
+        StubInput input = new StubInput(
+                new String[] {"0"}
+        );
+        StubAction action = new StubAction();
+        new StartUI().init(input, new Tracker(), new UserAction[] { action });
+        String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+                .add("Menu.")
+                .add("0. Stub action")
+                .toString();
+        assertThat(new String(out.toByteArray()), is(expect));
+    }
+
     @Test
     public void whenCreateItem() {
         StubInput input = new StubInput(
@@ -40,8 +73,7 @@ public class StartUITest {
                         new FindByNameAction(),
                         new ExitAction()});
         Item[] expected = tracker.findByName("new item");
-        assertThat(items[0].getName(), is(expected[0].getName()));
-        assertThat(items[1].getName(), is(expected[1].getName()));
+        assertThat(items[0].getName(), is(expected[1].getName()));
     }
 
     @Test
@@ -65,7 +97,7 @@ public class StartUITest {
         new StartUI().init(input, tracker,
                 new UserAction[]{
                         new CreateAction(),
-                        new ShowAllItemsAction(),
+                        new FindAllAction(),
                         new ExitAction()});
         Item[] expected = tracker.findAll();
         assertThat(items.length, is(expected.length));

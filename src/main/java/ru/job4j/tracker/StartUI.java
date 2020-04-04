@@ -1,11 +1,17 @@
 package ru.job4j.tracker;
 
 
-
 /**
  * 2.1. Реализация класса StartUI[#257548]
  */
 public class StartUI {
+    /**
+     * Иницилизация меню.
+     *
+     * @param input   Входные данные
+     * @param tracker хранилище
+     * @param actions список действий
+     */
     public void init(Input input, Tracker tracker, UserAction[] actions) {
         boolean run = true;
         while (run) {
@@ -16,7 +22,11 @@ public class StartUI {
         }
     }
 
-
+    /**
+     * Выводим список возоможных действий.
+     *
+     * @param actions список действий.
+     */
     private void showMenu(UserAction[] actions) {
         System.out.println("Menu.");
         for (int index = 0; index < actions.length; index++) {
@@ -29,7 +39,7 @@ public class StartUI {
         Tracker tracker = new Tracker();
         UserAction[] actions = {
                 new CreateAction(),
-                new ShowAllItemsAction(),
+                new FindAllAction(),
                 new ReplaceAction(),
                 new DeleteAction(),
                 new FindByIdAction(),
