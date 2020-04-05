@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import java.util.StringJoiner;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 public class StartUITest {
@@ -125,5 +126,28 @@ public class StartUITest {
         Item need = tracker.findAll()[0];
         Item expected = new Item("need item");
         assertThat(need.getName(), is(expected.getName()));
+    }
+
+    @Test
+    public void whenDeleted() {
+        Tracker tracker = new Tracker();
+        tracker.add(new Item("need item"));
+        String id = tracker.findAll()[0].getId();
+        StubInput input = new StubInput(
+                new String[]{"0", "new item",
+                        "0", "new item2",
+                        "0", "new item3",
+                        "0", "new item",
+                        "1", id,
+                        "2"
+                }
+        );
+        new StartUI().init(input, tracker,
+                new UserAction[]{
+                        new CreateAction(),
+                        new DeleteAction(),
+                        new ExitAction()});
+        Item expected = tracker.findById(id);
+        assertNull(expected);
     }
 }
