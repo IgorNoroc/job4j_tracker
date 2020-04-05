@@ -74,7 +74,7 @@ public class StartUITest {
                         new FindByNameAction(),
                         new ExitAction()});
         Item[] expected = tracker.findByName("new item");
-        assertThat(items[0].getName(), is(expected[1].getName()));
+        assertThat(items, is(expected));
     }
 
     @Test
