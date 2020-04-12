@@ -1,11 +1,12 @@
 package ru.job4j.tracker;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 /**
  * Собираем заявку.
  */
-public class Item {
+public class Item implements Comparable<Item>, Comparator<Item> {
     private String id;
     private String name;
 
@@ -46,4 +47,16 @@ public class Item {
     public String toString() {
         return name;
     }
+
+    @Override
+    public int compare(Item o1, Item o2) {
+        return o2.name.compareTo(o1.name);
+    }
+
+    @Override
+    public int compareTo(Item o) {
+        return this.name.compareTo(o.name);
+    }
+
+
 }
