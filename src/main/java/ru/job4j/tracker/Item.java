@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Собираем заявку.
  */
-public class Item implements Comparable<Item>, Comparator<Item> {
+public class Item implements Comparable<Item> {
     private String id;
     private String name;
 
@@ -49,14 +49,8 @@ public class Item implements Comparable<Item>, Comparator<Item> {
     }
 
     @Override
-    public int compare(Item o1, Item o2) {
-        return o2.name.compareTo(o1.name);
-    }
-
-    @Override
     public int compareTo(Item o) {
         return this.name.compareTo(o.name);
     }
-
 
 }
