@@ -35,12 +35,12 @@ public class ValidateInputTest {
 
     @Test
     public void whenMaxInput() {
-        String[] data = {"test", "1"};
+        String[] data = {"4", "1"};
         ValidateInput input = new ValidateInput(new StubInput(data));
-        input.askInt("Select", 3);
+        input.askInt("select", 3);
         assertThat(
                 out.toString(),
-                is(String.format("Please enter validate data again.%n"))
+                is(String.format("Please select key from menu.%n"))
         );
     }
 }
