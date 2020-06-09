@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 public class TrackerTest {
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = new Item("test1");
         tracker.add(item);
         Item result = tracker.findById(item.getId());
@@ -22,7 +22,7 @@ public class TrackerTest {
 
     @Test
     public void whenFindAllTheSameNames() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item1 = new Item("Igor");
         Item item2 = new Item("Vasea");
         Item item3 = new Item("Sasha");
@@ -43,7 +43,7 @@ public class TrackerTest {
 
     @Test
     public void whenFindAll() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item1 = new Item("Igor");
         Item item4 = new Item("Igor");
         tracker.add(item1);
@@ -60,7 +60,7 @@ public class TrackerTest {
 
     @Test
     public void whenReplace() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item bug = new Item("Bug");
         tracker.add(bug);
         String id = bug.getId();
@@ -71,7 +71,7 @@ public class TrackerTest {
 
     @Test
     public void whenDelete() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item bug = new Item("Bug");
         tracker.add(bug);
         String id = bug.getId();

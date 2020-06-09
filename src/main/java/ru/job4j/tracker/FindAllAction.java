@@ -19,10 +19,12 @@ public class FindAllAction implements UserAction {
      * @return получилась операция или нет.
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store tracker) {
+        System.out.println("----------------------------------------");
         for (Item item : tracker.findAll()) {
             System.out.println(String.format("%s %s", item.getId(), item.getName()));
         }
+        System.out.println("----------------------------------------");
         return true;
     }
 }

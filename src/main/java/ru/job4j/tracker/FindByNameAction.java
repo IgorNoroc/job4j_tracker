@@ -20,7 +20,7 @@ public class FindByNameAction implements UserAction {
      * @return истина или ложь.
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         List<Item> items = tracker.findByName(input.askStr("Please, enter name to search: "));
         for (Item item : items) {
             System.out.println(item);

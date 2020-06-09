@@ -16,7 +16,7 @@ public class StartUI {
      * @param tracker хранилище
      * @param actions список действий
      */
-    public void init(Input input, Tracker tracker, List<UserAction> actions) {
+    public void init(Input input, Store tracker, List<UserAction> actions) {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
@@ -40,18 +40,22 @@ public class StartUI {
 
     public static void main(String[] args) {
         Input input = new ValidateInput(new ConsoleInput());
-        Tracker tracker = new Tracker();
-        List<UserAction> actions = new ArrayList<>(
-                Arrays.asList(
-                        new CreateAction(),
-                        new FindAllAction(),
-                        new ReplaceAction(),
-                        new DeleteAction(),
-                        new FindByIdAction(),
-                        new FindByNameAction(),
-                        new ExitAction()
-                )
-        );
-        new StartUI().init(input, tracker, actions);
+        try (Store tracker = new SqlTracker()) {
+            tracker.init();
+            List<UserAction> actions = new ArrayList<>(
+                    Arrays.asList(
+                            new CreateAction(),
+                            new FindAllAction(),
+                            new ReplaceAction(),
+                            new DeleteAction(),
+                            new FindByIdAction(),
+                            new FindByNameAction(),
+                            new ExitAction()
+                    )
+            );
+            new StartUI().init(input, tracker, actions);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

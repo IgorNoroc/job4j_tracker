@@ -20,7 +20,7 @@ public class ReplaceAction implements UserAction {
      * @return получилось или нет отредактировать.
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         boolean result = false;
         String id = input.askStr("Please, enter Id of need item: ");
         Item item = new Item(input.askStr("Please, enter new item: "));

@@ -19,7 +19,7 @@ public class FindByIdAction implements UserAction {
      * @return истина или ложь.
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         Item item = tracker.findById(input.askStr("Please, enter item Id: "));
         System.out.println("Found item : " + item);
         return item != null;

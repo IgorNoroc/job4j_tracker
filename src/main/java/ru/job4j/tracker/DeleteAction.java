@@ -19,7 +19,7 @@ public class DeleteAction implements UserAction {
      * @return получилось или нет.
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         boolean result = false;
         String id = input.askStr("Please, enter item Id what you want delete: ");
         if (tracker.delete(id)) {
