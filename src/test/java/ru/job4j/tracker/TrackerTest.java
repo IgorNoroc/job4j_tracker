@@ -12,7 +12,6 @@ import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class TrackerTest {
-    @Ignore
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
         MemTracker tracker = new MemTracker();
@@ -22,7 +21,6 @@ public class TrackerTest {
         assertThat(result.getName(), is(item.getName()));
     }
 
-    @Ignore
     @Test
     public void whenFindAllTheSameNames() {
         MemTracker tracker = new MemTracker();
@@ -44,7 +42,6 @@ public class TrackerTest {
         assertThat(result, is(expected));
     }
 
-    @Ignore
     @Test
     public void whenFindAll() {
         MemTracker tracker = new MemTracker();
@@ -62,7 +59,6 @@ public class TrackerTest {
         assertThat(result, is(expected));
     }
 
-    @Ignore
     @Test
     public void whenReplace() {
         MemTracker tracker = new MemTracker();
@@ -74,7 +70,6 @@ public class TrackerTest {
         assertThat(tracker.findById(id).getName(), is("Bug with description"));
     }
 
-    @Ignore
     @Test
     public void whenDelete() {
         MemTracker tracker = new MemTracker();

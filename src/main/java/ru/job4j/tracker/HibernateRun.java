@@ -17,6 +17,7 @@ public class HibernateRun {
             Item item = create(new Item("Learn Hibernate"), sf);
             System.out.println(item);
             item.setName("Learn Hibernate 5.");
+            System.out.println(item.getId());
             update(item, sf);
             System.out.println(item);
             Item rsl = findById(item.getId(), sf);
