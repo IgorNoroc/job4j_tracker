@@ -24,7 +24,7 @@ public class ReplaceAction implements UserAction {
         boolean result = false;
         String id = input.askStr("Please, enter Id of need item: ");
         Item item = new Item(input.askStr("Please, enter new item: "));
-        if (tracker.replace(id, item)) {
+        if (tracker.replace(Integer.valueOf(id), item)) {
             System.out.println("Edit was successful!");
             result = true;
         } else {

@@ -49,9 +49,9 @@ public class MemTracker {
      *
      * @return Уникальный ключ.
      */
-    private String generateId() {
+    private int generateId() {
         Random rm = new Random();
-        return String.valueOf(rm.nextLong() + System.currentTimeMillis());
+        return rm.nextInt() + (int) System.currentTimeMillis();
     }
 
     /**
@@ -60,7 +60,7 @@ public class MemTracker {
      * @param id Id
      * @return нужный индекс.
      */
-    private int indexOf(String id) {
+    private Integer indexOf(Integer id) {
         int rsl = -1;
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getId().equals(id)) {
@@ -77,7 +77,7 @@ public class MemTracker {
      * @param id идентификатор.
      * @return найденное совпадение.
      */
-    public Item findById(String id) {
+    public Item findById(Integer id) {
         int index = indexOf(id);
         return index != -1 ? items.get(index) : null;
     }
@@ -88,7 +88,7 @@ public class MemTracker {
      * @param id   старая заявка.
      * @param item новая заявка.
      */
-    public boolean replace(String id, Item item) {
+    public boolean replace(Integer id, Item item) {
         int index = indexOf(id);
         if (index != -1) {
             item.setId(items.get(index).getId());
@@ -102,7 +102,7 @@ public class MemTracker {
      *
      * @param id идентификатор заявки.
      */
-    public boolean delete(String id) {
+    public boolean delete(Integer id) {
         int index = indexOf(id);
         if (index != -1) {
             items.remove(index);

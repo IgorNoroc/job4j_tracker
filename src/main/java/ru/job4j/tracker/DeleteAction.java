@@ -22,7 +22,7 @@ public class DeleteAction implements UserAction {
     public boolean execute(Input input, Store tracker) {
         boolean result = false;
         String id = input.askStr("Please, enter item Id what you want delete: ");
-        if (tracker.delete(id)) {
+        if (tracker.delete(Integer.valueOf(id))) {
             System.out.println("Item " + id + " was deleted");
             result = true;
         } else {

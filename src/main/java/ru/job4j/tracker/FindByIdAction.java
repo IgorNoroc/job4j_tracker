@@ -20,7 +20,7 @@ public class FindByIdAction implements UserAction {
      */
     @Override
     public boolean execute(Input input, Store tracker) {
-        Item item = tracker.findById(input.askStr("Please, enter item Id: "));
+        Item item = tracker.findById(Integer.valueOf(input.askStr("Please, enter item Id: ")));
         System.out.println("Found item : " + item);
         return item != null;
     }

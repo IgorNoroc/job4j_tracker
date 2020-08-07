@@ -39,19 +39,23 @@ public class SqlTrackerTest {
     @Test
     public void showAllItems() throws Exception {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
-            tracker.add(new Item("name"));
-            tracker.add(new Item("user"));
-            List<Item> expected = List.of(
-                    new Item("name"),
-                    new Item("user")
-            );
-            assertThat(tracker.findAll(), is(expected));
+            tracker.clearTableItems();
+            Item first = tracker.add(new Item("name"));
+            Item second = tracker.add(new Item("user"));
+            Item expectedFirst = new Item("name");
+            expectedFirst.setId(first.getId());
+            Item expectedSecond = new Item("user");
+            expectedSecond.setId(second.getId());
+            List<Item> expected = List.of(expectedFirst, expectedSecond);
+            List<Item> result = tracker.findAll();
+            assertThat(expected, is(result));
         }
     }
 
     @Test
     public void deleteItem() throws Exception {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
+            tracker.clearTableItems();
             Item item = new Item("name");
             tracker.add(item);
             List<Item> list = tracker.findAll();
@@ -64,11 +68,9 @@ public class SqlTrackerTest {
     public void replaceItem() throws Exception {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
             Item item = new Item("name");
-            tracker.add(item);
-            List<Item> list = tracker.findAll();
-            tracker.replace(list.get(0).getId(), new Item("user"));
-            list = tracker.findAll();
-            assertThat(list.get(0).getName(), is("user"));
+            Item rsl = tracker.add(item);
+            tracker.replace(rsl.getId(), new Item("user"));
+            assertThat(tracker.findById(rsl.getId()).getName(), is("user"));
         }
     }
 
@@ -76,10 +78,8 @@ public class SqlTrackerTest {
     public void findByIdItem() throws Exception {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
             Item item = new Item("name");
-            tracker.add(item);
-            List<Item> list = tracker.findAll();
-            String rsl = list.get(0).getId();
-            assertThat(tracker.findById(rsl).getName(), is("name"));
+            Item expected = tracker.add(item);
+            assertThat(tracker.findById(expected.getId()).getName(), is("name"));
         }
     }
 

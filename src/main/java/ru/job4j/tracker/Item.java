@@ -1,24 +1,32 @@
 package ru.job4j.tracker;
 
-import java.util.Comparator;
+import javax.persistence.*;
+
 import java.util.Objects;
 
 /**
  * Собираем заявку.
  */
+@Entity
+@Table(name = "items")
 public class Item implements Comparable<Item> {
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
+
+    public Item() {
+    }
 
     public Item(String name) {
         this.name = name;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -39,7 +47,8 @@ public class Item implements Comparable<Item> {
             return false;
         }
         Item item = (Item) o;
-        return Objects.equals(name, item.name);
+        return Objects.equals(id, item.id)
+                && Objects.equals(name, item.name);
     }
 
     @Override
